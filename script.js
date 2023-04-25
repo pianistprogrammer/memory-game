@@ -217,11 +217,14 @@ function updateTimerDisplay() {
 function stopTimer() {
   clearInterval(timerIntervalId);
 }
-const init = () => {
+const startGame = () => {
+  init();
   timerIntervalId = setInterval(() => {
     secondsElapsed++;
     updateTimerDisplay();
   }, 1000);
+};
+const init = () => {
   localStorage.removeItem("whichPlayerMatched");
   const gameBoard = document.querySelector("#game-board");
   const cloneAnimals = animals.concat(animals);
@@ -231,5 +234,3 @@ const init = () => {
   currentPlayer = Math.random() < 0.5 ? "Player1" : "Player2";
   displayMatches();
 };
-
-init();
