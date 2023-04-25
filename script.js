@@ -193,17 +193,14 @@ const displayMatches = () => {
   if (lockCards) {
     return;
   }
-  if (currentPlayer === "Player 1" && playerMatched == "Player1") {
+  if (playerMatched === "Player1") {
     currentPlayer = "Player1";
-  } else if (currentPlayer === "Player2" && playerMatched == "Player2") {
+  } else if (playerMatched === "Player2") {
     currentPlayer = "Player2";
   }
-  if (currentPlayer === "Player1") {
-    playerToDisplay = player1FromStorage;
-  }
-  if (currentPlayer === "Player2") {
-    playerToDisplay = player2FromStorage;
-  }
+  playerToDisplay =
+    currentPlayer === "Player1" ? player1FromStorage : player2FromStorage;
+
   currentPlayerDisplay.innerText = `Current player: ${playerToDisplay}`;
 };
 
