@@ -23,7 +23,7 @@ h1 {
     grid-gap: 10px;
     width: 600px;
     height: 600px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .card {
@@ -69,7 +69,6 @@ h1 {
 }
 .score {
     display: block;
-    text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 24px;

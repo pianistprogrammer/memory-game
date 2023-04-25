@@ -17,15 +17,15 @@
         <p id="timer">Time to finish: 00:00</p>
         <h1>Memory Game</h1>
         <div class="score">
-          <div class="text-center">
-            <div id="current-player">Player 1's Turn</div>
+          <div class="text-left">
+            <div id="current-player"></div>
           </div>
           <div>
             <div id="player1-score">Player 1: 0</div>
             <div id="player2-score">Player 2: 0</div>
           </div>
         </div>
-        <footer class="mt-5 text-center">Pianist-programmer 2023</footer>
+        <footer class="mt-5">Pianist-programmer 2023</footer>
       </div>
 
       <div class="left-side">
@@ -34,6 +34,7 @@
           <input
             id="player1"
             type="text"
+            required
             placeholder="Enter your name"
             name="player1"
             class="mb-3 form-control"
@@ -42,6 +43,7 @@
           <input
             id="player2"
             type="text"
+            required
             name="player2"
             placeholder="Enter your name"
             class="mb-3 form-control"

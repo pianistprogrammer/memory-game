@@ -155,9 +155,13 @@ const submitPlayers = () => {
   player1 = document.getElementById("player1").value;
   player2 = document.getElementById("player2").value;
 
-  localStorage.setItem("player1", player1);
-  localStorage.setItem("player2", player2);
-  displayMatches();
+  if (player1 === "" && player2 === "") {
+    alert("fill in the player names");
+  } else {
+    localStorage.setItem("player1", player1);
+    localStorage.setItem("player2", player2);
+    displayMatches();
+  }
 };
 function resetCards() {
   localStorage.removeItem("whichPlayerMatched");
@@ -218,11 +222,19 @@ function stopTimer() {
   clearInterval(timerIntervalId);
 }
 const startGame = () => {
-  init();
-  timerIntervalId = setInterval(() => {
-    secondsElapsed++;
-    updateTimerDisplay();
-  }, 1000);
+  const p1 = localStorage.getItem("player1");
+  const p2 = localStorage.getItem("player2");
+  if (p1 && p2) {
+    const startButton = document.querySelector("#start-button");
+    startButton.disabled = true;
+    init();
+    timerIntervalId = setInterval(() => {
+      secondsElapsed++;
+      updateTimerDisplay();
+    }, 1000);
+  } else {
+    alert("fill in the player names");
+  }
 };
 const init = () => {
   localStorage.removeItem("whichPlayerMatched");
