@@ -1,3 +1,4 @@
+// all the arrays used
 const animals = [
   { emoji: "🐶", name: "dog" },
   { emoji: "🐱", name: "cat" },
