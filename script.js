@@ -43,6 +43,8 @@ let lockCards = false;
 let matches = 0;
 let player1Matches = 0;
 let player2Matches = 0;
+let secondsElapsed = 0;
+let timerIntervalId;
 let playerToDisplay = "Player 1";
 let player1 =
   localStorage.getItem("player1") === null
@@ -120,6 +122,7 @@ const createCard = (animal) => {
             flash.style.display = "none";
           }, 1000);
           if (matches === 18) {
+            stopTimer();
             if (player1Matches > player2Matches) {
               alert(`Congratulations! ${player1} wins!`);
             } else if (player2Matches > player1Matches) {
@@ -203,8 +206,22 @@ const displayMatches = () => {
 
   currentPlayerDisplay.innerText = `Current player: ${playerToDisplay}`;
 };
-
+function updateTimerDisplay() {
+  const minutes = Math.floor(secondsElapsed / 60);
+  const seconds = secondsElapsed % 60;
+  const minutesStr = minutes < 10 ? `0${minutes}` : `${minutes}`;
+  const secondsStr = seconds < 10 ? `0${seconds}` : `${seconds}`;
+  const timeStr = `${minutesStr}:${secondsStr}`;
+  document.getElementById("timer").textContent = `Time to finish: ${timeStr}`;
+}
+function stopTimer() {
+  clearInterval(timerIntervalId);
+}
 const init = () => {
+  timerIntervalId = setInterval(() => {
+    secondsElapsed++;
+    updateTimerDisplay();
+  }, 1000);
   localStorage.removeItem("whichPlayerMatched");
   const gameBoard = document.querySelector("#game-board");
   const cloneAnimals = animals.concat(animals);
