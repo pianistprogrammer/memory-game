@@ -17,24 +17,47 @@ const animals = [
   { emoji: "🐟", name: "fish" },
   { emoji: "🐠", name: "tropical fish" },
   { emoji: "🐡", name: "blowfish" },
-  // { emoji: "🐬", name: "dolphin" },
-  // { emoji: "🐳", name: "whale" },
-  // { emoji: "🦈", name: "shark" },
-  // { emoji: "🐊", name: "crocodile" },
-  // { emoji: "🐢", name: "turtle" },
-  // { emoji: "🦎", name: "lizard" },
-  // { emoji: "🐍", name: "snake" },
-  // { emoji: "🐦", name: "bird" },
-  // { emoji: "🦉", name: "owl" },
-  // { emoji: "🐧", name: "penguin" },
-  // { emoji: "🦜", name: "parrot" },
-  // { emoji: "🦢", name: "swan" },
-  // { emoji: "🦆", name: "duck" },
-  // { emoji: "🦚", name: "peacock" },
-  // { emoji: "🦩", name: "flamingo" },
-  // { emoji: "🦔", name: "hedgehog" },
-  // { emoji: "🦝", name: "raccoon" },
-  // { emoji: "🦨", name: "skunk" },
+];
+const instruments = [
+  { emoji: "🎹", name: "keyboard" },
+  { emoji: "🎸", name: "guitar" },
+  { emoji: "🥁", name: "drum" },
+  { emoji: "🎻", name: "violin" },
+  { emoji: "🪕", name: "banjo" },
+  { emoji: "🎺", name: "trumpet" },
+  { emoji: "🎷", name: "saxophone" },
+  { emoji: "🪗", name: "accordion" },
+  { emoji: "🎤", name: "microphone" },
+  { emoji: "🎧", name: "headphone" },
+  { emoji: "🎵", name: "note" },
+  { emoji: "🎶", name: "notes" },
+  { emoji: "🎼", name: "score" },
+  { emoji: "🪘", name: "bongo" },
+  { emoji: "🎬", name: "movie-board" },
+  { emoji: "🎛️", name: "knobs" },
+  { emoji: "🥢", name: "drum-sticks" },
+  { emoji: "🔊", name: "speaker" },
+];
+
+const travelPlaces = [
+  { emoji: "🏕️", name: "campsite" },
+  { emoji: "🏰", name: "castle" },
+  { emoji: "🏯", name: "castle" },
+  { emoji: "🏟️", name: "stadium" },
+  { emoji: "🏖️", name: "beach" },
+  { emoji: "🏝️", name: "island" },
+  { emoji: "🏜️", name: "desert" },
+  { emoji: "🌋", name: "volcano" },
+  { emoji: "🌁", name: "foggy" },
+  { emoji: "🏔️", name: "mountain" },
+  { emoji: "🗻", name: "mount fuji" },
+  { emoji: "🗿", name: "moai" },
+  { emoji: "🗽", name: "liberty" },
+  { emoji: "🚂", name: "locomotive" },
+  { emoji: "🚀", name: "rocket" },
+  { emoji: "🛸", name: "flying saucer" },
+  { emoji: "🛶", name: "canoe" },
+  { emoji: "🚤", name: "speedboat" },
 ];
 
 let firstCard = null;
@@ -56,6 +79,22 @@ let player2 =
     : localStorage.getItem("player2");
 let currentPlayer = "Player1";
 let whichPlayerMatched = "";
+let items = [];
+
+const stats = document.querySelector("#stats");
+stats.style.display = "none";
+
+const leftForm = document.querySelector("#left-side-form");
+leftForm.style.display = "none";
+
+const startBtn = document.querySelector("#start-button");
+startBtn.style.display = "none";
+
+const restartBtn = document.querySelector("#restart-button");
+restartBtn.style.display = "none";
+
+const gameBoard = document.querySelector("#game-board");
+gameBoard.style.display = "none";
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -65,7 +104,7 @@ function shuffle(array) {
   return array;
 }
 
-const createCard = (animal) => {
+const createCard = (item) => {
   const card = document.createElement("div");
   const front = document.createElement("div");
   const back = document.createElement("div");
@@ -85,21 +124,21 @@ const createCard = (animal) => {
 
       if (firstCard === null) {
         firstCard = card;
-        back.innerText = animal.emoji;
+        back.innerText = item.emoji;
       } else {
         secondCard = card;
         lockCards = true;
-        back.innerText = animal.name;
+        back.innerText = item.name;
         secondCard.querySelector(".back").classList.add("second");
 
-        const firstCardAnimal = animals.find(
+        const firstCardItem = items.find(
           (a) => a.emoji === firstCard.querySelector(".back").innerText
         );
-        const secondCardAnimal = animals.find(
+        const secondCardItem = items.find(
           (a) => a.name === secondCard.querySelector(".back").innerText
         );
 
-        if (firstCardAnimal.emoji === secondCardAnimal.emoji) {
+        if (firstCardItem.emoji === secondCardItem.emoji) {
           matches++;
           if (currentPlayer === "Player1") {
             player1Matches++;
@@ -152,6 +191,11 @@ const resetGame = () => {
   localStorage.removeItem("player2");
 };
 const submitPlayers = () => {
+  stats.style.display = "block";
+  leftForm.style.display = "block";
+  startBtn.style.display = "inline-block";
+  restartBtn.style.display = "inline-block";
+
   player1 = document.getElementById("player1").value;
   player2 = document.getElementById("player2").value;
 
@@ -216,18 +260,49 @@ function updateTimerDisplay() {
   const minutesStr = minutes < 10 ? `0${minutes}` : `${minutes}`;
   const secondsStr = seconds < 10 ? `0${seconds}` : `${seconds}`;
   const timeStr = `${minutesStr}:${secondsStr}`;
-  document.getElementById("timer").textContent = `Time to finish: ${timeStr}`;
+  let timerDiv = document.querySelector("#timer");
+  timerDiv.textContent = `Time to finish: ${timeStr}`;
 }
 function stopTimer() {
   clearInterval(timerIntervalId);
 }
+const selectCategory = (item) => {
+  const music = document.querySelector("#select-music");
+  const travel = document.querySelector("#select-travel");
+  const selectAnimals = document.querySelector("#select-animals");
+
+  if (item === "music") {
+    travel.disabled = true;
+    selectAnimals.disabled = true;
+    init("instruments");
+    items = instruments;
+    music.classList.remove("btn-outline-info");
+    music.classList.add("btn-info");
+  } else if (item === "travel") {
+    music.disabled = true;
+    selectAnimals.disabled = true;
+    init("travelPlaces");
+    items = travelPlaces;
+    travel.classList.remove("btn-outline-info");
+    travel.classList.add("btn-info");
+  } else if (item === "animals") {
+    music.disabled = true;
+    travel.disabled = true;
+    init("animals");
+    items = animals;
+    selectAnimals.classList.remove("btn-outline-info");
+    selectAnimals.classList.add("btn-info");
+  }
+  leftForm.style.display = "block";
+};
+
 const startGame = () => {
+  gameBoard.style.display = "grid";
   const p1 = localStorage.getItem("player1");
   const p2 = localStorage.getItem("player2");
   if (p1 && p2) {
     const startButton = document.querySelector("#start-button");
     startButton.disabled = true;
-    init();
     timerIntervalId = setInterval(() => {
       secondsElapsed++;
       updateTimerDisplay();
@@ -236,12 +311,22 @@ const startGame = () => {
     alert("fill in the player names");
   }
 };
-const init = () => {
+
+const init = (selectedArray) => {
   localStorage.removeItem("whichPlayerMatched");
-  const gameBoard = document.querySelector("#game-board");
-  const cloneAnimals = animals.concat(animals);
-  shuffle(cloneAnimals);
-  const cards = cloneAnimals.map((animal) => createCard(animal));
+  let cloneArray;
+  if (selectedArray === "animals") {
+    cloneArray = animals.concat(animals);
+  } else if (selectedArray === "travelPlaces") {
+    cloneArray = travelPlaces.concat(travelPlaces);
+  } else if (selectedArray === "instruments") {
+    cloneArray = instruments.concat(instruments);
+  } else {
+    console.error("Invalid selection");
+    return;
+  }
+  shuffle(cloneArray);
+  const cards = cloneArray.map((item) => createCard(item));
   cards.forEach((card) => gameBoard.appendChild(card));
   currentPlayer = Math.random() < 0.5 ? "Player1" : "Player2";
   displayMatches();

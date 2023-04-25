@@ -14,22 +14,50 @@
   <body>
     <div class="contain">
       <div>
-        <p id="timer">Time to finish: 00:00</p>
         <h1>Memory Game</h1>
-        <div class="score">
-          <div class="text-left">
-            <div id="current-player"></div>
-          </div>
-          <div>
-            <div id="player1-score">Player 1: 0</div>
-            <div id="player2-score">Player 2: 0</div>
+        <p>pick a category</p>
+        <button
+          onclick="selectCategory('animals')"
+          id="select-animals"
+          type="button"
+          class="mb-3 btn btn-outline-info"
+        >
+          Animals
+        </button>
+        <button
+          onclick="selectCategory('music')"
+          id="select-music"
+          type="button"
+          class="mb-3 btn btn-outline-info"
+        >
+          Musical Instruments
+        </button>
+        <button
+          onclick="selectCategory('travel')"
+          id="select-travel"
+          type="button"
+          class="mb-3 btn btn-outline-info"
+        >
+          Travel & Places
+        </button>
+        <div id="stats">
+          <p id="timer" class="mt-3 mb-3">Time to finish: 00:00</p>
+          <div class="score">
+            <div class="text-left">
+              <div id="current-player"></div>
+            </div>
+            <div>
+              <div id="player1-score">Player 1: 0</div>
+              <div id="player2-score">Player 2: 0</div>
+            </div>
           </div>
         </div>
+
         <footer class="mt-5">Pianist-programmer 2023</footer>
       </div>
 
       <div class="left-side">
-        <div>
+        <div id="left-side-form">
           <label class="" for="">Player 1 </label>
           <input
             id="player1"
@@ -56,11 +84,7 @@
       <div class="right-side">
         <div id="game-board"></div>
         <div class="flash"></div>
-        <button
-          onclick="startGame()"
-          class=" btn btn-primary"
-          id="start-button"
-        >
+        <button onclick="startGame()" class="btn btn-primary" id="start-button">
           START
         </button>
         <button
