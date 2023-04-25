@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Memory Game</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="contain">
+      <div>
+        <h1>Memory Game</h1>
+        <div class="score">
+          <div class="text-center">
+            <div id="current-player">Player 1's Turn</div>
+          </div>
+          <div>
+            <div id="player1-score">Player 1: 0</div>
+            <div id="player2-score">Player 2: 0</div>
+          </div>
+        </div>
+        <footer class="mt-5 text-center">Pianist-programmer 2023</footer>
+      </div>
+
+      <div class="left-side">
+        <div>
+          <label class="" for="">Player 1 </label>
+          <input
+            id="player1"
+            type="text"
+            placeholder="Enter your name"
+            name="player1"
+            class="mb-3 form-control"
+          />
+          <label class="" for="">Player 2 </label>
+          <input
+            id="player2"
+            type="text"
+            name="player2"
+            placeholder="Enter your name"
+            class="mb-3 form-control"
+          />
+          <button onclick="submitPlayers()" class="mb-2 btn btn-success">
+            Submit
+          </button>
+        </div>
+      </div>
+      <div class="right-side">
+        <div id="game-board"></div>
+        <div class="flash"></div>
+        <button
+          onclick="resetGame()"
+          class="btn btn-warning"
+          id="restart-button"
+        >
+          Restart Game
+        </button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

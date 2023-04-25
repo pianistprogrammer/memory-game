@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    height: 100vh;
+}
+.contain{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.right-side, .left-side{
+    margin-top: 30px;
+}
+h1 {
+    text-align: center;
+    margin-top: 0;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-gap: 10px;
+    width: 600px;
+    height: 600px;
+    margin-bottom: 15px;
+}
+
+.card {
+    position: relative;
+    perspective: 1000px;
+}
+
+.card .front,
+.card .back {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 5px;
+}
+
+.card .front {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.card .back {
+    background-color: #000000;
+    color: #ffffff;
+    transform: rotateY(180deg);
+}
+.card .back .back-text {
+    font-size: 1.5rem !important;
+}
+.card.flip .front {
+    transform: rotateY(180deg);
+}
+
+.card.flip .back {
+    transform: rotateY(0deg);
+}
+.card.flip .back.second {
+    font-size: 1.2em;
+}
+.score {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+.flash {
+    background-color: green;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 10px;
+    display: none;
+}
