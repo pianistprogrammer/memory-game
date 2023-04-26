@@ -104,7 +104,6 @@ function shuffle(array) {
   }
   return array;
 }
-
 const createCard = (item) => {
   const card = document.createElement("div");
   const front = document.createElement("div");
@@ -192,11 +191,6 @@ const resetGame = () => {
   localStorage.removeItem("player2");
 };
 const submitPlayers = () => {
-  stats.style.display = "block";
-  leftForm.style.display = "block";
-  startBtn.style.display = "inline-block";
-  restartBtn.style.display = "inline-block";
-
   player1 = document.getElementById("player1").value;
   player2 = document.getElementById("player2").value;
 
@@ -205,6 +199,11 @@ const submitPlayers = () => {
   } else {
     localStorage.setItem("player1", player1);
     localStorage.setItem("player2", player2);
+
+    stats.style.display = "block";
+    leftForm.style.display = "block";
+    startBtn.style.display = "inline-block";
+    restartBtn.style.display = "inline-block";
     displayMatches();
   }
 };
@@ -296,7 +295,6 @@ const selectCategory = (item) => {
   }
   leftForm.style.display = "block";
 };
-
 const startGame = () => {
   gameBoard.style.display = "grid";
   const p1 = localStorage.getItem("player1");
@@ -312,7 +310,6 @@ const startGame = () => {
     alert("fill in the player names");
   }
 };
-
 const init = (selectedArray) => {
   localStorage.removeItem("whichPlayerMatched");
   let cloneArray;
