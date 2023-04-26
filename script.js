@@ -65,7 +65,7 @@ const clothes = [
   { emoji: "👖", name: "jeans" },
   { emoji: "👔", name: "necktie" },
   { emoji: "👗", name: "dress" },
-  { emoji: "👙", name: "bikini" },
+  { emoji: "👙", name: "swim suit" },
   { emoji: "👠", name: "high-heel" },
   { emoji: "👞", name: "shoe" },
   { emoji: "👢", name: "boot" },
@@ -406,7 +406,7 @@ const startGame = () => {
     alert("fill in the player names");
   }
 };
-const allArrays = {
+const arrays = {
   animals: animals,
   travelPlaces: travelPlaces,
   instruments: instruments,
@@ -419,11 +419,11 @@ const allArrays = {
 
 const init = (selectedArray) => {
   localStorage.removeItem("whichPlayerMatched");
-  if (!(selectedArray in allArrays)) {
+  if (!(selectedArray in arrays)) {
     console.error("Invalid selection");
     return;
   }
-  let cloneArray = allArrays[selectedArray].concat(allArrays[selectedArray]);
+  let cloneArray = arrays[selectedArray].concat(arrays[selectedArray]);
   shuffle(cloneArray);
   const cards = cloneArray.map((item) => createCard(item));
   cards.forEach((card) => gameBoard.appendChild(card));
