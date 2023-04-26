@@ -39,7 +39,6 @@ const instruments = [
   { emoji: "🥢", name: "drum-sticks" },
   { emoji: "🔊", name: "speaker" },
 ];
-
 const travelPlaces = [
   { emoji: "🏕️", name: "campsite" },
   { emoji: "🏰", name: "castle" },
@@ -100,7 +99,46 @@ const sports = [
   { emoji: "🛹", name: "skateboard" },
   { emoji: "🛼", name: "roller skate" },
 ];
-
+const technologies = [
+  { emoji: "💻", name: "laptop" },
+  { emoji: "📱", name: "mobile phone" },
+  { emoji: "🖥️", name: "desktop" },
+  { emoji: "🖨️", name: "printer" },
+  { emoji: "🖱️", name: "computer mouse" },
+  { emoji: "🎧", name: "headphone" },
+  { emoji: "🎮", name: "video game" },
+  { emoji: "📷", name: "camera" },
+  { emoji: "💽", name: "computer disk" },
+  { emoji: "🔌", name: "electric plug" },
+  { emoji: "🔋", name: "battery" },
+  { emoji: "💾", name: "floppy disk" },
+  { emoji: "📹", name: "video camera" },
+  { emoji: "🕹️", name: "joystick" },
+  { emoji: "📡", name: "satellite" },
+  { emoji: "📺", name: "television" },
+  { emoji: "📟", name: "pager" },
+  { emoji: "🔬", name: "microscope" },
+];
+const flags = [
+  { emoji: "🇺🇸", name: "United States" },
+  { emoji: "🇨🇦", name: "Canada" },
+  { emoji: "🇲🇽", name: "Mexico" },
+  { emoji: "🇧🇷", name: "Brazil" },
+  { emoji: "🇦🇷", name: "Argentina" },
+  { emoji: "🇬🇧", name: "United Kingdom" },
+  { emoji: "🇫🇷", name: "France" },
+  { emoji: "🇩🇪", name: "Germany" },
+  { emoji: "🇮🇹", name: "Italy" },
+  { emoji: "🇵🇱", name: "Poland" },
+  { emoji: "🇯🇵", name: "Japan" },
+  { emoji: "🇨🇳", name: "China" },
+  { emoji: "🇰🇷", name: "South Korea" },
+  { emoji: "🇿🇦", name: "South Africa" },
+  { emoji: "🇦🇺", name: "Australia" },
+  { emoji: "🇮🇳", name: "India" },
+  { emoji: "🇪🇸", name: "Spain" },
+  { emoji: "🇨🇭", name: "Switzerland" },
+];
 
 let firstCard = null;
 let secondCard = null;
@@ -328,6 +366,14 @@ const categories = {
     array: sports,
     button: document.querySelector("#select-sports"),
   },
+  technologies: {
+    array: technologies,
+    button: document.querySelector("#select-technology"),
+  },
+  flags: {
+    array: flags,
+    button: document.querySelector("#select-flags"),
+  },
 };
 
 const selectCategory = (category) => {
@@ -365,7 +411,9 @@ const allArrays = {
   travelPlaces: travelPlaces,
   instruments: instruments,
   clothes: clothes,
-  sports:sports
+  sports: sports,
+  technologies: technologies,
+  flags:flags
   // add more arrays here...
 };
 
