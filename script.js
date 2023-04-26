@@ -60,6 +60,47 @@ const travelPlaces = [
   { emoji: "🛶", name: "canoe" },
   { emoji: "🚤", name: "speedboat" },
 ];
+const clothes = [
+  { emoji: "👚", name: "blouse" },
+  { emoji: "👕", name: "t-shirt" },
+  { emoji: "👖", name: "jeans" },
+  { emoji: "👔", name: "necktie" },
+  { emoji: "👗", name: "dress" },
+  { emoji: "👙", name: "bikini" },
+  { emoji: "👠", name: "high-heel" },
+  { emoji: "👞", name: "shoe" },
+  { emoji: "👢", name: "boot" },
+  { emoji: "🧥", name: "coat" },
+  { emoji: "🧢", name: "cap" },
+  { emoji: "👟", name: "running-shoe" },
+  { emoji: "🧦", name: "socks" },
+  { emoji: "👒", name: "hat" },
+  { emoji: "🎓", name: "graduation cap" },
+  { emoji: "🕶️", name: "sunglasses" },
+  { emoji: "🧤", name: "gloves" },
+  { emoji: "👘", name: "kimono" },
+];
+const sports = [
+  { emoji: "🏀", name: "basketball" },
+  { emoji: "⚽", name: "soccer ball" },
+  { emoji: "🏏", name: "american football" },
+  { emoji: "⚾", name: "baseball" },
+  { emoji: "🥎", name: "softball" },
+  { emoji: "🏐", name: "volleyball" },
+  { emoji: "🏉", name: "rugby football" },
+  { emoji: "🎾", name: "tennis" },
+  { emoji: "🏸", name: "badminton" },
+  { emoji: "🥏", name: "flying disc" },
+  { emoji: "🏓", name: "ping pong" },
+  { emoji: "🏒", name: "ice hockey" },
+  { emoji: "🥅", name: "goal net" },
+  { emoji: "🥊", name: "boxing glove" },
+  { emoji: "🎣", name: "fishing pole" },
+  { emoji: "🎿", name: "ski" },
+  { emoji: "🛹", name: "skateboard" },
+  { emoji: "🛼", name: "roller skate" },
+];
+
 
 let firstCard = null;
 let secondCard = null;
@@ -97,13 +138,13 @@ restartBtn.style.display = "none";
 const gameBoard = document.querySelector("#game-board");
 gameBoard.style.display = "none";
 
-function shuffle(array) {
+const shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
-}
+};
 const createCard = (item) => {
   const card = document.createElement("div");
   const front = document.createElement("div");
@@ -207,7 +248,7 @@ const submitPlayers = () => {
     displayMatches();
   }
 };
-function resetCards() {
+const resetCards = () => {
   localStorage.removeItem("whichPlayerMatched");
   firstCard.classList.remove("flip");
   secondCard.classList.remove("flip");
@@ -223,7 +264,7 @@ function resetCards() {
     currentPlayer = "Player1";
   }
   displayMatches();
-}
+};
 const displayMatches = () => {
   const player1Score = document.querySelector("#player1-score");
   const player2Score = document.querySelector("#player2-score");
@@ -254,7 +295,7 @@ const displayMatches = () => {
 
   currentPlayerDisplay.innerText = `Current player: ${playerToDisplay}`;
 };
-function updateTimerDisplay() {
+const updateTimerDisplay = () => {
   const minutes = Math.floor(secondsElapsed / 60);
   const seconds = secondsElapsed % 60;
   const minutesStr = minutes < 10 ? `0${minutes}` : `${minutes}`;
@@ -262,39 +303,48 @@ function updateTimerDisplay() {
   const timeStr = `${minutesStr}:${secondsStr}`;
   let timerDiv = document.querySelector("#timer");
   timerDiv.textContent = `Time to finish: ${timeStr}`;
-}
-function stopTimer() {
+};
+const stopTimer = () => {
   clearInterval(timerIntervalId);
-}
-const selectCategory = (item) => {
-  const music = document.querySelector("#select-music");
-  const travel = document.querySelector("#select-travel");
-  const selectAnimals = document.querySelector("#select-animals");
+};
+const categories = {
+  instruments: {
+    array: instruments,
+    button: document.querySelector("#select-music"),
+  },
+  travelPlaces: {
+    array: travelPlaces,
+    button: document.querySelector("#select-travel"),
+  },
+  animals: {
+    array: animals,
+    button: document.querySelector("#select-animals"),
+  },
+  clothes: {
+    array: clothes,
+    button: document.querySelector("#select-clothes"),
+  },
+  sports: {
+    array: sports,
+    button: document.querySelector("#select-sports"),
+  },
+};
 
-  if (item === "music") {
-    travel.disabled = true;
-    selectAnimals.disabled = true;
-    init("instruments");
-    items = instruments;
-    music.classList.remove("btn-outline-info");
-    music.classList.add("btn-info");
-  } else if (item === "travel") {
-    music.disabled = true;
-    selectAnimals.disabled = true;
-    init("travelPlaces");
-    items = travelPlaces;
-    travel.classList.remove("btn-outline-info");
-    travel.classList.add("btn-info");
-  } else if (item === "animals") {
-    music.disabled = true;
-    travel.disabled = true;
-    init("animals");
-    items = animals;
-    selectAnimals.classList.remove("btn-outline-info");
-    selectAnimals.classList.add("btn-info");
+const selectCategory = (category) => {
+  for (const [key, value] of Object.entries(categories)) {
+    const button = value.button;
+    const array = value.array;
+    const disabled = key !== category;
+    button.disabled = disabled;
+    if (disabled) continue;
+    init(key);
+    items = array;
+    button.classList.remove("btn-outline-info");
+    button.classList.add("btn-info");
   }
   leftForm.style.display = "block";
 };
+
 const startGame = () => {
   gameBoard.style.display = "grid";
   const p1 = localStorage.getItem("player1");
@@ -310,19 +360,22 @@ const startGame = () => {
     alert("fill in the player names");
   }
 };
+const allArrays = {
+  animals: animals,
+  travelPlaces: travelPlaces,
+  instruments: instruments,
+  clothes: clothes,
+  sports:sports
+  // add more arrays here...
+};
+
 const init = (selectedArray) => {
   localStorage.removeItem("whichPlayerMatched");
-  let cloneArray;
-  if (selectedArray === "animals") {
-    cloneArray = animals.concat(animals);
-  } else if (selectedArray === "travelPlaces") {
-    cloneArray = travelPlaces.concat(travelPlaces);
-  } else if (selectedArray === "instruments") {
-    cloneArray = instruments.concat(instruments);
-  } else {
+  if (!(selectedArray in allArrays)) {
     console.error("Invalid selection");
     return;
   }
+  let cloneArray = allArrays[selectedArray].concat(allArrays[selectedArray]);
   shuffle(cloneArray);
   const cards = cloneArray.map((item) => createCard(item));
   cards.forEach((card) => gameBoard.appendChild(card));
